@@ -1,0 +1,23 @@
+<div class="chat-container">
+  <header class="chat-header">
+    <h4>Chat rutina</h4>
+  </header>
+    <main class="chat-history">
+      <ng-container *ngFor="let item of chatHistory">
+        <div class="messages" [ngClass]="{'blue': item.from === 'user', 'green': item.from === 'bot'}">
+          <i class="fa"
+            [ngClass]="{'fa-user-circle': item.from === 'user', 'fa-graduation-cap': item.from === 'bot'}"></i>
+          <span class="responses" [innerHTML]="formatText(item.message)"></span>
+        </div>
+        </ng-container>
+        <ng-container *ngIf="loading">
+          <app-home></app-home>
+        </ng-container>
+    </main>
+  <footer class="chat-input">
+    <ion-item>
+      <ion-input type="text" id="message-input" (keyup.enter)="sendData()" placeholder="Type your message..." [(ngModel)]="prompt" [disabled]="loading" autocomplete="off"/>
+      <ion-button id="send-button" (click)="sendData()"  [disabled]="loading">Send</ion-button>
+    </ion-item>  
+  </footer>
+</div>
